@@ -1,27 +1,39 @@
 <h1>Template Driven</h1>
-<form>
-  <div>
+<form (ngSubmit) = "onSubmit(f)" #f="ngForm">
+  <div ngModelGroup = "userData" >
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text"
              class="form-control"
-             id="username">
+             id="username"
+             name="username"
+             [ngModel]="user.username"
+             required>
     </div>
     <div class="form-group">
       <label for="email">E-Mail</label>
       <input type="text"
-             class="form-control"
-             id="email">
+             class="has-error has-feedback form-control"
+             id="email"
+             name="email"
+             [ngModel]="user.mail"
+             required
+             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+             
     </div>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password"
            class="form-control"
-           id="password">
+           id="password"
+           name="password"
+           [ngModel]="user.password"
+           required>
   </div>
-  <div class="radio">
+  <div class="radio" *ngFor="let item of genders">
     <label>
+         <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="item">{{ item }}
     </label>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
